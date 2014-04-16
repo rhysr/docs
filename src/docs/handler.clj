@@ -1,5 +1,6 @@
-(ns docs.handler)
-
+(ns docs.handler
+  (:require [compojure.core :refer [defroutes routes]]
+            [compojure.route :as route]))
 
 (defn init []
   (println "Starting application"))
@@ -7,7 +8,10 @@
 (defn destroy []
   (println "Shutting down application"))
 
-(defn app [request-map]
-  {:status 200
-   :body "doc"})
+(defroutes app-routes
+  (route/resources "/")
+  (route/not-found "Not Found"))
+
+(def app
+  (routes app-routes))
 

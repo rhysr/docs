@@ -1,8 +1,17 @@
-Run
+# Documents
 
-Development
+## How to run
 
-  lein ring server
+ - Install leiningen
 
-Production
-    lein with-profile production ring server
+**Development Mode**
+```sh
+lein ring server
+```
+
+**Production Mode**
+```sh
+lein with-profile production ring server
+```
+
+Go to http://localhost:3000

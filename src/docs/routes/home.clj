@@ -5,7 +5,7 @@
 
 (defn home []
   {:status 200
-   :body (layout/common [:h1 "Doc"])})
+   :body (layout/common [:h1 "Docs"])})
 
 (defroutes home-routes
   (GET "/" [] (home)))

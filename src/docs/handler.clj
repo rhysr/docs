@@ -1,7 +1,8 @@
 (ns docs.handler
   (:require [compojure.core :refer [defroutes routes]]
             [compojure.route :as route]
-            [docs.routes.home :refer [home-routes]]))
+            [docs.routes.home :refer [home-routes]]
+            [docs.routes.note :refer [note-routes]]))
 
 (defn init []
   (println "Starting application"))
@@ -14,5 +15,5 @@
   (route/not-found "Not Found"))
 
 (def app
-  (routes home-routes app-routes))
+  (routes home-routes note-routes app-routes))
 

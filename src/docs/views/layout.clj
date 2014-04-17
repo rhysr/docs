@@ -1,5 +1,6 @@
 (ns docs.views.layout
-  (:require [hiccup.page :refer [html5 include-css]]))
+  (:require [hiccup.page :refer [html5 include-css]])
+  (:require [hiccup.element :refer [link-to]]))
 
 
 (defn common [& body]
@@ -14,4 +15,15 @@
      (include-css "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css")
      (include-css "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css")]
     [:body
-     [:div.container body]]))
+     [:div.container
+      [:div.row [:h1 "Docs"] [:hr]]
+      body]]))
+
+(defn nav-list [list-items]
+  (for
+    [list-item list-items]
+    [:p
+     (link-to
+       {}
+       (str "/note/" (:id list-item))
+       (:name list-item))]))

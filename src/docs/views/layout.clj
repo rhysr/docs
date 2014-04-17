@@ -16,7 +16,13 @@
      (include-css "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css")]
     [:body
      [:div.container
-      [:div.row [:h1 "Docs"] [:hr]]
+      [:div.row
+       [:h1
+        (link-to
+          {}
+          "/"
+          "Docs")]
+       [:hr]]
       body]]))
 
 (defn nav-list [list-items]

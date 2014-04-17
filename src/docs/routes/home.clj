@@ -1,15 +1,11 @@
 (ns docs.routes.home
   (:require [compojure.core :refer [defroutes GET]]
-            [hiccup.page :refer [html5]]))
+            [docs.views.layout :as layout]))
 
 
 (defn home []
   {:status 200
-   :body (html5
-           [:head]
-           [:body
-            [:h1 "Docs"]])})
-
+   :body (layout/common [:h1 "Doc"])})
 
 (defroutes home-routes
   (GET "/" [] (home)))

@@ -4,7 +4,7 @@
 
 
 (defn common [& body]
-  (html5 [:head]
+  (html5
     [:head
      [:title "Docs"]
      ; get rid of charset tag as it kills IE preprocessor

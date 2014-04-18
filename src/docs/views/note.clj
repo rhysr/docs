@@ -18,6 +18,8 @@
    [:h2 (:name note)]
    [:div.form-group
     [:textarea.form-control {:rows 10} (:content note)]]
+   [:div.form-group
+    [:input.form-control {:type "file"}]]
    [:ul
     (for
       [file (:files note)]
@@ -29,6 +31,8 @@
    [:h2 "Create Note"]
    [:div.form-group
     [:textarea.form-control {:rows 10}]]
+   [:div.form-group
+    [:input.form-control {:type "file"}]]
    [:ul]
    [:button.btn.btn-primary "Create"]])
 

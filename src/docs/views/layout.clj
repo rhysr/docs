@@ -26,10 +26,16 @@
       body]]))
 
 (defn nav-list [list-items]
-  (for
-    [list-item list-items]
-    [:p
-     (link-to
-       {}
-       (str "/note/" (:id list-item))
-       (:name list-item))]))
+  [:div.side-nav
+   [:a.btn.btn-default
+    {:href "/note/create"}
+    "Create Note"]
+   [:br]
+   [:div.note-list
+    (for
+      [list-item list-items]
+      [:p
+      (link-to
+        {}
+        (str "/note/" (:id list-item))
+        (:name list-item))])]])

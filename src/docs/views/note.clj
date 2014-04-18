@@ -24,6 +24,14 @@
       [:li (:name file)])]
    [:button.btn.btn-primary "Save"]])
 
+(defn note-create []
+  [:div
+   [:h2 "Create Note"]
+   [:div.form-group
+    [:textarea.form-control {:rows 10}]]
+   [:ul]
+   [:button.btn.btn-primary "Create"]])
+
 (defn layout-note-view [note-list note]
   (layout/common
     [:div.row
@@ -39,3 +47,11 @@
       (layout/nav-list note-list)]
      [:div.col-md-10
       (note-edit note)]]))
+
+(defn layout-note-create [note-list]
+  (layout/common
+    [:div.row
+     [:div.col-md-2
+      (layout/nav-list note-list)]
+     [:div.col-md-10
+      (note-create)]]))

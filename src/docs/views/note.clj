@@ -1,5 +1,7 @@
 (ns docs.views.note
-  (:require [docs.views.layout :as layout]))
+  (:require [docs.views.layout :as layout])
+  (:require [hiccup.element :refer [link-to]])
+  (:require [hiccup.form :refer [form-to]]))
 
 (defn note-view [note]
   [:div
@@ -9,32 +11,37 @@
     (for
       [file (:files note)]
       [:li (:name file)])]
-   [:a.btn.btn-default
-    {:href (str "/note/" (:id note) "/edit")}
-    "Edit"]])
+   (link-to
+     {:class "btn btn-default"}
+     (str "/note/" (:id note) "/edit")
+     "Edit")])
 
 (defn note-edit [note]
   [:div
    [:h2 (:name note)]
-   [:div.form-group
-    [:textarea.form-control {:rows 10} (:content note)]]
-   [:div.form-group
-    [:input.form-control {:type "file"}]]
-   [:ul
-    (for
-      [file (:files note)]
-      [:li (:name file)])]
-   [:button.btn.btn-primary "Save"]])
+   (form-to
+    [:post "/note/create"]
+    [:div.form-group
+      [:textarea.form-control {:rows 10} (:content note)]]
+    [:div.form-group
+      [:input.form-control {:type "file"}]]
+    [:ul
+      (for
+        [file (:files note)]
+        [:li (:name file)])]
+    [:button.btn.btn-primary.btn-lg "Save"])])
 
 (defn note-create []
   [:div
    [:h2 "Create Note"]
-   [:div.form-group
-    [:textarea.form-control {:rows 10}]]
-   [:div.form-group
-    [:input.form-control {:type "file"}]]
-   [:ul]
-   [:button.btn.btn-primary "Create"]])
+   (form-to
+    [:post "/note/create"]
+    [:div.form-group
+      [:textarea.form-control {:rows 10}]]
+    [:div.form-group
+      [:input.form-control {:type "file"}]]
+    [:ul]
+    [:button.btn.btn-primary.btn-lg "Create"])])
 
 (defn layout-note-view [note-list note]
   (layout/common

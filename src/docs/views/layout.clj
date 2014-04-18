@@ -25,11 +25,13 @@
        [:hr]]
       body]]))
 
+
 (defn nav-list [list-items]
   [:div.side-nav
-   [:a.btn.btn-default
-    {:href "/note/create"}
-    "Create Note"]
+   (link-to
+     {:class "btn btn-default"}
+     "/note/create"
+     "Create Note")
    [:br]
    [:div.note-list
     (for

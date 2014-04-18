@@ -13,3 +13,12 @@
     :name "Note 5"}
    {:id 6
     :name "Note 6"}])
+
+(defn get-note [id]
+  {:id id
+   :name (str "Note " id)
+   :content "Note content"
+   :files [{:name "File 1"}
+           {:name "File 2"}
+           {:name "File 3"}
+           {:name "File 4"}]})

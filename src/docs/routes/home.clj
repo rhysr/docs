@@ -10,7 +10,8 @@
            [:div.row
             [:div.col-md-2
              (layout/nav-list (get-note-list))]
-            [:div.col-md-10 [:h2 "Things"]]])})
+            [:div.col-md-10
+             [:h2 "Things"] ]])})
 
 (defroutes home-routes
   (GET "/" [] (home)))

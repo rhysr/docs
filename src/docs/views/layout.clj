@@ -1,5 +1,5 @@
 (ns docs.views.layout
-  (:require [hiccup.page :refer [html5 include-css]])
+  (:require [hiccup.page :refer [html5 include-css include-js]])
   (:require [hiccup.element :refer [link-to]]))
 
 
@@ -12,8 +12,10 @@
      [:meta {:charset "utf-8"}]
      [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge"}]
      [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
-     (include-css "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css")
-     (include-css "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css")]
+     (include-css
+       "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+       "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
+       "/css/docs.css")]
     [:body
      [:div.container
       [:div.row
@@ -23,7 +25,8 @@
           "/"
           "Docs")]
        [:hr]]
-      body]]))
+      body]
+     (include-js "/js/holder.js")]))
 
 
 (defn nav-list [list-items]

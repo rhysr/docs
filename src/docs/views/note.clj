@@ -3,14 +3,22 @@
   (:require [hiccup.element :refer [link-to]])
   (:require [hiccup.form :refer [form-to]]))
 
+(defn file-container [file]
+  [:div.file-container
+   [:div.file-image
+    [:img {:data-src "/holder.js/100x100"}]]
+   [:div.file-desc
+    (:name file)]])
+
+
 (defn note-view [note]
   [:div
    [:h2 (:name note)]
    [:p (:content note)]
-   [:ul
+   [:div.files
     (for
       [file (:files note)]
-      [:li (:name file)])]
+        (file-container file))]
    (link-to
      {:class "btn btn-default"}
      (str "/note/" (:id note) "/edit")
@@ -25,10 +33,10 @@
       [:textarea.form-control {:rows 10} (:content note)]]
     [:div.form-group
       [:input.form-control {:type "file"}]]
-    [:ul
+    [:div.files
       (for
         [file (:files note)]
-        [:li (:name file)])]
+        (file-container file))]
     [:button.btn.btn-primary.btn-lg "Save"])])
 
 (defn note-create []

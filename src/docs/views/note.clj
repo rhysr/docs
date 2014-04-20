@@ -17,7 +17,7 @@
 (defn note-view [note]
   [:div
    [:div.note-container
-    [:h2.page-header (:name note)]
+    [:h1.page-header (:name note)]
     [:p (:content note)]]
    [:div.files
     (for
@@ -30,7 +30,8 @@
 
 (defn note-edit [note]
   [:div
-   [:h2 (:name note)]
+   [:div.note-container
+    [:h1.page-header (:name note)]]
    (form-to
     [:post "/note/create"]
     [:div.form-group
@@ -45,7 +46,8 @@
 
 (defn note-create []
   [:div
-   [:h2 "Create Note"]
+   [:div.note-container
+    [:h1.page-header "Create Note"]]
    (form-to
     [:post "/note/create"]
     [:div.form-group

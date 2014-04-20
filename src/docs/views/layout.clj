@@ -15,18 +15,29 @@
      (include-css
        "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
        "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
+       "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
        "/css/docs.css")]
     [:body
+     [:nav.navbar.navbar-default
+      [:div.container-fluid
+       [:div.navbar-header
+        [:button.navbar-toggle
+         {:data-toggle "collapse"
+          :data-target ".navbar-collapse.collapse"}
+         [:span.sr-only "Toggle navigation"]
+         [:span.icon-bar]
+         [:span.icon-bar]
+         [:span.icon-bar]]
+        (link-to {:class "navbar-brand"} "/" "Docs")]
+       [:div.navbar-collapse.collapse
+        [:ul.nav.navbar-nav]]]]
      [:div.container-fluid
-      [:div.row
-       [:h1
-        (link-to
-          {}
-          "/"
-          "Docs")]
-       [:hr]]
+
       body]
-     (include-js "/js/holder.js")]))
+     (include-js
+       "//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"
+       "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+       "/js/holder.js")]))
 
 
 (defn nav-list [list-items]

@@ -17,7 +17,7 @@
        "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
        "/css/docs.css")]
     [:body
-     [:div.container
+     [:div.container-fluid
       [:div.row
        [:h1
         (link-to

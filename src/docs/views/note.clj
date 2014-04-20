@@ -6,15 +6,19 @@
 (defn file-container [file]
   [:div.file-container
    [:div.file-image
-    [:img {:data-src "/holder.js/100x100"}]]
-   [:div.file-desc
-    (:name file)]])
+    [:img {:data-src "/holder.js/100x100/sky"}]]
+   [:div.file-details
+    [:span.file-title (:name file)]
+    [:span.file-name (str "(" (:file file) ")")]
+    [:span.file-size (:size file)]
+    [:span.file-desc (:desc file)]]])
 
 
 (defn note-view [note]
   [:div
-   [:h2 (:name note)]
-   [:p (:content note)]
+   [:div.note-container
+    [:h2.page-header (:name note)]
+    [:p (:content note)]]
    [:div.files
     (for
       [file (:files note)]

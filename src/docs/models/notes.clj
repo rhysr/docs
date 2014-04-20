@@ -18,7 +18,7 @@
   {:id id
    :name (str "Note " id)
    :content "Note content"
-   :files [{:name "File 1"}
-           {:name "File 2"}
-           {:name "File 3"}
-           {:name "File 4"}]})
+   :files [{:name "File 1" :file "file_0001.jpg" :desc "Some stuff about the file" :size "100KB"}
+           {:name "File 2" :file "file_0002.jpg" :desc "Some stuff about the file" :size "23KB"}
+           {:name "File 3" :file "file_0003.jpg" :desc "Some stuff about the file" :size "5B"}
+           {:name "File 4" :file "file_0004.jpg" :desc "Some stuff about the file" :size "1.2MB"}]})

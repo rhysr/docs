@@ -1,11 +1,17 @@
 body {
     background-color: #F5F5F5;
 }
+
+.note-container {
+    padding: 10px 10px 10px 10px;
+    background-color: #FFF;
+    margin-bottom: 20px;
+}
+
 .file-container {
     margin-bottom: 10px;
     height: 100px;
     background-color: #FFF;
-
 }
 
 .file-image {
@@ -14,7 +20,7 @@ body {
     float: left;
 }
 
-.file-desc {
+.file-details {
     padding: 10px;
     margin-left: 100px;
 }

@@ -18,7 +18,7 @@
        "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
        "/css/docs.css")]
     [:body
-     [:nav.navbar.navbar-default
+     [:nav.navbar.navbar-default.navbar-fixed-top
       [:div.container-fluid
        [:div.navbar-header
         [:button.navbar-toggle

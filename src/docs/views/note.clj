@@ -35,7 +35,7 @@
    (form-to
     [:post "/note/create"]
     [:div.form-group
-      [:input.form-control {:name "name"} (note :name)]]
+      [:input.form-control {:name "name" :value (note :name)}]]
     [:div.form-group
       [:textarea.form-control {:rows 10 :name "content"} (:content note)]]
     [:div.form-group

@@ -35,7 +35,9 @@
    (form-to
     [:post "/note/create"]
     [:div.form-group
-      [:textarea.form-control {:rows 10} (:content note)]]
+      [:input.form-control {:name "name"} (note :name)]]
+    [:div.form-group
+      [:textarea.form-control {:rows 10 :name "content"} (:content note)]]
     [:div.form-group
       [:input.form-control {:type "file"}]]
     [:div.files
@@ -51,7 +53,9 @@
    (form-to
     [:post "/note/create"]
     [:div.form-group
-      [:textarea.form-control {:rows 10}]]
+      [:input.form-control {:name "name"}]]
+    [:div.form-group
+      [:textarea.form-control {:rows 10 :name "content"}]]
     [:div.form-group
       [:input.form-control {:type "file"}]]
     [:ul]

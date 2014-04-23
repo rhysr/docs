@@ -1,27 +1,48 @@
 (ns docs.routes.note
-  (:require [compojure.core :refer [defroutes GET]]
+  (:require [compojure.core :refer [defroutes GET POST]]
             [docs.views.note :refer [layout-note-view layout-note-edit layout-note-create]]
             [docs.models.notes :refer [get-note-list get-note]]))
 
 
-(defn view-note [id]
+(defn view-note-page [id]
   (let [note (get-note id)]
     {:status 200
      :body (layout-note-view (get-note-list) note)}))
 
-(defn edit-note [id]
+(defn edit-note-page [id]
   (let [note (get-note id)]
     {:status 200
      :body (layout-note-edit (get-note-list) note)}))
 
-(defn create-note []
+(defn create-note-page [& [message]]
   {:status 200
     :body (layout-note-create (get-note-list))})
 
+(defn create-note [params]
+  (println params)
+  (cond
+    (not (contains? params "content"))
+    (create-note-page "Missing content")
+    (not (contains? params "name"))
+    (create-note-page "Missing name")
+    (empty? (params "name"))
+    (create-note-page "Fill in the name")
+    (empty? (params "content"))
+    (create-note-page "Fill in the note content")
+    :else
+    (do
+      (println "Create new note and redirect")
+      (create-note-page "success"))))
+
+
+
 (defroutes note-routes
   (GET ["/note/:id", :id #"[0-9]+"] [id]
-       (view-note id))
+       (view-note-page id))
   (GET ["/note/:id/edit", :id #"[0-9]+"] [id]
-       (edit-note id))
+       (edit-note-page id))
   (GET "/note/create" []
-       (create-note)))
+       (create-note-page))
+  (POST "/note/create" {form-params :form-params}
+        (create-note form-params))
+  )

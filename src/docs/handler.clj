@@ -1,6 +1,7 @@
 (ns docs.handler
   (:require [compojure.core :refer [defroutes routes]]
             [compojure.route :as route]
+            [ring.middleware.params :refer [wrap-params]]
             [docs.routes.home :refer [home-routes]]
             [docs.routes.note :refer [note-routes]]))
 
@@ -15,5 +16,6 @@
   (route/not-found "Not Found"))
 
 (def app
-  (routes home-routes note-routes app-routes))
+  (wrap-params
+    (routes home-routes note-routes app-routes)))
 

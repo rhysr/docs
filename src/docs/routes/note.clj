@@ -16,7 +16,7 @@
 
 (defn create-note-page [& [message]]
   {:status 200
-    :body (layout-note-create (get-note-list))})
+    :body (layout-note-create (get-note-list) message)})
 
 (defn create-note [params]
   (println params)
@@ -32,7 +32,7 @@
     :else
     (do
       (println "Create new note and redirect")
-      (create-note-page "success"))))
+      (create-note-page))))
 
 
 

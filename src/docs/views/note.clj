@@ -29,38 +29,36 @@
      "Edit")])
 
 (defn note-edit [note]
-  [:div
-   [:div.note-container
-    [:h1.page-header (:name note)]]
+  [:div.note-container
+   [:h1.page-header (:name note)]
    (form-to
-    [:post "/note/create"]
-    [:div.form-group
+     [:post "/note/create"]
+     [:div.form-group
       [:input.form-control {:name "name" :value (note :name)}]]
-    [:div.form-group
+     [:div.form-group
       [:textarea.form-control {:rows 10 :name "content"} (:content note)]]
-    [:div.form-group
+     [:div.form-group
       [:input.form-control {:type "file"}]]
-    [:div.files
+     [:div.files
       (for
         [file (:files note)]
         (file-container file))]
-    [:button.btn.btn-primary.btn-lg "Save"])])
+     [:button.btn.btn-primary.btn-lg "Save"])])
 
 (defn note-create [& [params error]]
-  [:div
-   [:div.note-container
-    [:h1.page-header "Create Note"]]
+  [:div.note-container
+   [:h1.page-header "Create Note"]
    (form-to
-    [:post "/note/create"]
-    (cond (not (empty? error)) [:div.has-error [:p.help-block error]])
-    [:div.form-group
+     [:post "/note/create"]
+     (cond (not (empty? error)) [:div.has-error [:p.help-block error]])
+     [:div.form-group
       [:input.form-control {:name "name" :value (get params "name" "")}]]
-    [:div.form-group
+     [:div.form-group
       [:textarea.form-control {:rows 10 :name "content"} (get params "content" "")]]
-    [:div.form-group
+     [:div.form-group
       [:input.form-control {:type "file"}]]
-    [:ul]
-    [:button.btn.btn-primary.btn-lg "Create"])])
+     [:ul]
+     [:button.btn.btn-primary.btn-lg "Create"])])
 
 (defn layout-note-view [note-list note]
   (layout/common

@@ -14,21 +14,20 @@
     {:status 200
      :body (layout-note-edit (get-note-list) note)}))
 
-(defn create-note-page [& [message]]
+(defn create-note-page [& [params message]]
   {:status 200
-    :body (layout-note-create (get-note-list) message)})
+    :body (layout-note-create (get-note-list) params message)})
 
 (defn create-note [params]
-  (println params)
   (cond
     (not (contains? params "content"))
-    (create-note-page "Missing content")
+    (create-note-page params "Missing content")
     (not (contains? params "name"))
-    (create-note-page "Missing name")
+    (create-note-page params "Missing name")
     (empty? (params "name"))
-    (create-note-page "Fill in the name")
+    (create-note-page params "Fill in the name")
     (empty? (params "content"))
-    (create-note-page "Fill in the note content")
+    (create-note-page params "Fill in the note content")
     :else
     (do
       (println "Create new note and redirect")

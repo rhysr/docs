@@ -46,7 +46,7 @@
         (file-container file))]
     [:button.btn.btn-primary.btn-lg "Save"])])
 
-(defn note-create [& [error]]
+(defn note-create [& [params error]]
   [:div
    [:div.note-container
     [:h1.page-header "Create Note"]]
@@ -54,9 +54,9 @@
     [:post "/note/create"]
     (cond (not (empty? error)) [:div.has-error [:p.help-block error]])
     [:div.form-group
-      [:input.form-control {:name "name"}]]
+      [:input.form-control {:name "name" :value (get params "name" "")}]]
     [:div.form-group
-      [:textarea.form-control {:rows 10 :name "content"}]]
+      [:textarea.form-control {:rows 10 :name "content"} (get params "content" "")]]
     [:div.form-group
       [:input.form-control {:type "file"}]]
     [:ul]
@@ -78,10 +78,10 @@
      [:div.col-md-10
       (note-edit note)]]))
 
-(defn layout-note-create [note-list & [error]]
+(defn layout-note-create [note-list & [params error]]
   (layout/common
     [:div.row
      [:div.col-md-2
       (layout/nav-list note-list)]
      [:div.col-md-10
-      (note-create error)]]))
+      (note-create params error)]]))

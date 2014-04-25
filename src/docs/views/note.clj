@@ -28,6 +28,11 @@
      (str "/note/" (:id note) "/edit")
      "Edit")])
 
+(defn note-not-found []
+  [:div
+   [:div.note-container
+    [:h1.page-header "Can't find this note"]]])
+
 (defn note-edit [note]
   [:div.note-container
    [:h1.page-header (:name note)]
@@ -86,3 +91,11 @@
       (layout/nav-list note-list)]
      [:div.col-md-10
       (note-create params errors)]]))
+
+(defn layout-note-not-found [note-list]
+  (layout/common
+    [:div.row
+     [:div.col-md-2
+      (layout/nav-list note-list)]
+     [:div.col-md-10
+      (note-not-found)]]))

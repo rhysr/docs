@@ -1,19 +1,25 @@
 (ns docs.routes.note
   (:require [compojure.core :refer [defroutes GET POST]]
             [noir.validation :refer [rule errors? get-errors has-value?]]
-            [docs.views.note :refer [layout-note-view layout-note-edit layout-note-create]]
-            [docs.models.notes :refer [get-note-list get-note]]))
+            [docs.views.note :refer [layout-note-view layout-note-edit layout-note-create layout-note-not-found]]
+            [docs.models.notes :refer [get-note-list get-note save-note]]))
 
 
 (defn view-note-page [id]
   (let [note (get-note id)]
-    {:status 200
-     :body (layout-note-view (get-note-list) note)}))
+    (if (nil? note)
+      {:status 404
+       :body (layout-note-not-found (get-note-list))}
+      {:status 200
+      :body (layout-note-view (get-note-list) note)})))
 
 (defn edit-note-page [id]
   (let [note (get-note id)]
-    {:status 200
-     :body (layout-note-edit (get-note-list) note)}))
+    (if (nil? note)
+      {:status 404
+       :body (layout-note-not-found (get-note-list))}
+      {:status 200
+       :body (layout-note-edit (get-note-list) note)})))
 
 (defn create-note-page [& [params errors]]
   {:status 200
@@ -34,7 +40,9 @@
 
   (if (errors?)
     (create-note-page params (get-errors))
-    (create-note-page)))
+    (do
+      (save-note (params "name") (params "content"))
+      (create-note-page))))
 
 
 (defroutes note-routes

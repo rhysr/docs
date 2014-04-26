@@ -1,16 +1,11 @@
 (ns docs.models.notes
   (require [docs.models.db :as db]
-           [clojure.java.jdbc.deprecated :as sql]))
-
-
-
+           [clojure.java.jdbc :as jdbc]))
 
 (defn get-note-list []
-  (sql/with-connection
-   db/conn
-   (sql/with-query-results res
-    ["SELECT * FROM note ORDER BY timestamp DESC"]
-    (doall res))))
+  (jdbc/query
+    db/conn
+    ["SELECT * FROM note ORDER BY timestamp DESC"]))
 
 
 (defn get-note-files [id]
@@ -19,21 +14,19 @@
    {:name "File 3" :file "file_0003.jpg" :desc "Some stuff about the file" :size "5B"}
    {:name "File 4" :file "file_0004.jpg" :desc "Some stuff about the file" :size "1.2MB"}])
 
-; don't forget about files
 (defn get-note [id]
-  (sql/with-connection
+  (jdbc/query
     db/conn
-    (sql/with-query-results
-      res
-      ["select * from note where id = ?" id]
-      (if (nil? res)
-            nil
-            (assoc (first res) :files (get-note-files id))))))
+    ["select * from note where id = ?" id]
+    :result-set-fn (fn [res]
+                     (if (empty? res)
+                       nil
+                       (assoc (first res) :files (get-note-files id))))))
+
 
 (defn save-note [name content]
-  (sql/with-connection
+  (jdbc/insert!
     db/conn
-    (sql/insert-values
-      :note
-      [:name :content :timestamp]
-      [name content (new java.util.Date)])))
+    :note
+    [:name :content :timestamp]
+    [name content (new java.util.Date)]))

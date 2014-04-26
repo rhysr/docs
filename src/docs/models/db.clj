@@ -1,19 +1,19 @@
 (ns docs.models.db
-  (:require [clojure.java.jdbc.deprecated :as sql])
+  (:require [clojure.java.jdbc :as jdbc])
   (:import java.sql.DriverManager))
 
 
 (def conn {:classname "org.sqlite.JDBC"
-         :subprotocol "sqlite"
-         :subname "db.sq3"})
+           :subprotocol "sqlite"
+           :subname "db.sq3"})
 
 (defn create-note-table []
-  (sql/with-connection
+  (jdbc/db-do-commands
     conn
-    (sql/create-table
+    (jdbc/create-table-ddl
       :note
       [:id "INTEGER PRIMARY KEY AUTOINCREMENT"]
       [:timestamp "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
       [:name "TEXT"]
       [:content "TEXT"])
-    (sql/do-commands "CREATE INDEX timestamp_index ON note (timestamp)")))
+    "CREATE INDEX timestamp_index ON note (timestamp)"))

@@ -1,5 +1,5 @@
 (ns docs.models.db
-  (:require [clojure.java.jdbc :as sql])
+  (:require [clojure.java.jdbc.deprecated :as sql])
   (:import java.sql.DriverManager))
 
 

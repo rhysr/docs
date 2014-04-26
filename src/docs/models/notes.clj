@@ -1,6 +1,6 @@
 (ns docs.models.notes
   (require [docs.models.db :as db]
-           [clojure.java.jdbc :as sql]))
+           [clojure.java.jdbc.deprecated :as sql]))
 
 
 

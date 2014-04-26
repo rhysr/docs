@@ -5,7 +5,7 @@
                  [ring-server "0.3.1"]
                  [hiccup "1.0.5"]
                  [lib-noir "0.8.2"]
-                 [org.clojure/java.jdbc "0.2.3"]
+                 [org.clojure/java.jdbc "0.3.3"]
                  [org.xerial/sqlite-jdbc "3.7.2"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler docs.handler/app

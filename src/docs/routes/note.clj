@@ -2,7 +2,7 @@
   (:require [compojure.core :refer [defroutes GET POST]]
             [noir.validation :refer [rule errors? get-errors has-value?]]
             [docs.views.note :refer [layout-note-view layout-note-edit layout-note-create layout-note-not-found]]
-            [docs.models.notes :refer [get-note-list get-note save-note]]))
+            [docs.models.notes :refer [get-note-list get-note save-note!]]))
 
 
 (defn view-note-page [id]
@@ -41,7 +41,7 @@
   (if (errors?)
     (create-note-page params (get-errors))
     (do
-      (save-note (params "name") (params "content"))
+      (save-note! (params "name") (params "content"))
       (create-note-page))))
 
 

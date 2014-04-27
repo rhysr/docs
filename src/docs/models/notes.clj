@@ -24,7 +24,7 @@
                        (assoc (first res) :files (get-note-files id))))))
 
 
-(defn save-note [name content]
+(defn save-note! [name content]
   (jdbc/insert!
     db/conn
     :note

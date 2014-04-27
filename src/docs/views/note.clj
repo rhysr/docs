@@ -37,7 +37,7 @@
   [:div.note-container
    [:h1.page-header (:name note)]
    (form-to
-     [:post "/note/create"]
+     [:post (str "/note/" (note :id) "/edit")]
      [:div.form-group
       [:input.form-control {:name "name" :value (note :name)}]]
      [:div.form-group

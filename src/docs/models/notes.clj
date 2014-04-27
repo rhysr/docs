@@ -30,3 +30,10 @@
     :note
     [:name :content :timestamp]
     [name content (new java.util.Date)]))
+
+(defn update-note! [id name content]
+  (jdbc/update!
+    db/conn
+    :note
+    {:name name :content content :timestamp (new java.util.Date)}
+    ["id = ?" id]))

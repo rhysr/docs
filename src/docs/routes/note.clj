@@ -41,8 +41,10 @@
   (if (errors?)
     (create-note-page params (get-errors))
     (do
-      (save-note! (params "name") (params "content"))
-      (create-note-page))))
+      (let
+        [result (save-note! (params "name") (params "content"))]
+        {:status 303
+         :headers {"Location" (str "/note/" (result :note-id))}}))))
 
 (defn edit-note [id params]
   (cond

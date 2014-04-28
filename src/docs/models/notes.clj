@@ -25,11 +25,16 @@
 
 
 (defn save-note! [name content]
-  (jdbc/insert!
+  (let [r (jdbc/insert!
     db/conn
     :note
-    [:name :content :timestamp]
-    [name content (new java.util.Date)]))
+    {:name name
+     :content content
+     :timestamp (new java.util.Date) }
+    )]
+    {:note-id (
+               (keyword "last_insert_rowid()") (first r))
+     }))
 
 (defn update-note! [id name content]
   (jdbc/update!

@@ -69,33 +69,13 @@
      [:button.btn.btn-primary.btn-lg "Create"])])
 
 (defn layout-note-view [note-list note]
-  (layout/common
-    [:div.row
-     [:div.col-md-2
-      (layout/nav-list note-list)]
-     [:div.col-md-10
-      (note-view note)]]))
+  (layout/note-list-and-content note-list (note-view note)))
 
 (defn layout-note-edit [note-list note]
-  (layout/common
-    [:div.row
-     [:div.col-md-2
-      (layout/nav-list note-list)]
-     [:div.col-md-10
-      (note-edit note)]]))
+  (layout/note-list-and-content note-list (note-edit note)))
 
 (defn layout-note-create [note-list & [params errors]]
-  (layout/common
-    [:div.row
-     [:div.col-md-2
-      (layout/nav-list note-list)]
-     [:div.col-md-10
-      (note-create params errors)]]))
+  (layout/note-list-and-content note-list (note-create params errors)))
 
 (defn layout-note-not-found [note-list]
-  (layout/common
-    [:div.row
-     [:div.col-md-2
-      (layout/nav-list note-list)]
-     [:div.col-md-10
-      (note-not-found)]]))
+  (layout/note-list-and-content note-list (note-not-found)))

@@ -51,7 +51,13 @@
     (for
       [list-item list-items]
       [:p
-      (link-to
-        {}
-        (str "/note/" (:id list-item))
-        (:name list-item))])]])
+       (link-to
+         {}
+         (str "/note/" (:id list-item))
+         (:name list-item))])]])
+
+(defn note-list-and-content [list-items content]
+  (common
+    [:div.row
+     [:div.col-md-2 (nav-list list-items)]
+     [:div.col-md-10 content]]))

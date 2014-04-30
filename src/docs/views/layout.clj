@@ -37,7 +37,9 @@
      (include-js
        "//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"
        "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
-       "/js/holder.js")]))
+       "/js/holder.js"
+       "/js/docs.js"
+       )]))
 
 
 (defn nav-list [list-items]
@@ -58,6 +60,10 @@
 
 (defn note-list-and-content [list-items content]
   (common
-    [:div.row
-     [:div.col-md-2 (nav-list list-items)]
-     [:div.col-md-10 content]]))
+    [:div.row.row-offcanvas.row-offcanvas-left
+     [:div.col-xs-6.col-sm-3.sidebar-offcanvas (nav-list list-items)]
+     [:div.col-xs-12.col-sm-9
+      [:p.pull-left.visible-xs
+       [:button.btn.btn-primary.btn-xs {:data-toggle "offcanvas"} "Toggle list"]]
+      content]
+]))

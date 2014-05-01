@@ -1,3 +1,8 @@
+html,
+body {
+    overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
 body {
     background-color: #F5F5F5;
     padding-top: 70px;

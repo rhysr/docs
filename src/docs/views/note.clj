@@ -54,6 +54,7 @@
   [:div.note-container
    [:h1.page-header "Create Note"]
    (form-to
+     {:enctype "multipart/form-data"}
      [:post "/note/create"]
      (if (not (empty? errors))
        [:div.has-error
@@ -64,7 +65,7 @@
      [:div.form-group
       [:textarea.form-control {:rows 10 :name "content"} (get params "content" "")]]
      [:div.form-group
-      [:input.form-control {:type "file"}]]
+      [:input.form-control {:name "attachment" :type "file"}]]
      [:ul]
      [:button.btn.btn-primary.btn-lg "Create"])])
 

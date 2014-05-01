@@ -2,7 +2,7 @@
   (:require [compojure.core :refer [defroutes GET POST]]
             [noir.validation :refer [rule errors? get-errors has-value?]]
             [docs.views.note :refer [layout-note-view layout-note-edit layout-note-create layout-note-not-found]]
-            [docs.models.notes :refer [get-note-list get-note save-note! update-note!]]))
+            [docs.models.notes :refer [get-note-list get-note save-note! update-note! add-attachment!]]))
 
 
 (defn view-note-page [id]
@@ -25,7 +25,7 @@
   {:status 200
     :body (layout-note-create (get-note-list) params errors)})
 
-(defn create-note [params]
+(defn create-note [params file]
   (cond
     (not (contains? params "name"))
     (rule false [:name "Missing name"])
@@ -38,11 +38,13 @@
     (not (has-value? (params "content")))
     (rule false [:content "Fill in the note content"]))
 
+
   (if (errors?)
     (create-note-page params (get-errors))
     (do
       (let
         [result (save-note! (params "name") (params "content"))]
+        (if (not (empty? file)) (add-attachment! (result :note-id) (file :filename) (file :file)))
         {:status 303
          :headers {"Location" (str "/note/" (result :note-id))}}))))
 
@@ -76,6 +78,6 @@
          (edit-note id form-params))
   (GET "/note/create" []
        (create-note-page))
-  (POST "/note/create" {form-params :form-params}
-        (create-note form-params))
+  (POST "/note/create" {{{file :tempfile filename :filename} :attachment} :params :as request}
+        (create-note (:multipart-params request) {:file file :filename filename}))
   )

@@ -1,5 +1,6 @@
 (ns docs.models.notes
   (require [docs.models.db :as db]
+           [clojure.java.io :refer [copy file]]
            [clojure.java.jdbc :as jdbc]))
 
 (defn get-note-list []
@@ -42,3 +43,7 @@
     :note
     {:name name :content content :timestamp (new java.util.Date)}
     ["id = ?" id]))
+
+(defn add-attachment! [note-id filename file-stream]
+  (.mkdir (java.io.File. (str "files" "/" (str note-id))))
+  (copy file-stream (file "files" (str note-id) filename)))

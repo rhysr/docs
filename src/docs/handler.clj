@@ -1,7 +1,7 @@
 (ns docs.handler
   (:require [compojure.core :refer [defroutes routes]]
             [compojure.route :as route]
-            [ring.middleware.params :refer [wrap-params]]
+            [compojure.handler :as handler]
             [noir.validation :refer [wrap-noir-validation]]
             [docs.routes.home :refer [home-routes]]
             [docs.routes.note :refer [note-routes]]
@@ -21,7 +21,7 @@
 
 (def app
   (wrap-noir-validation
-    (wrap-params
+    (handler/site
       (routes
         home-routes
         note-routes

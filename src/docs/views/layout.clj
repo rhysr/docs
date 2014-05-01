@@ -45,7 +45,7 @@
 (defn nav-list [list-items]
   [:div.side-nav
    (link-to
-     {:class "btn btn-default"}
+     {:class "btn btn-default btn-block"}
      "/note/create"
      "Create Note")
    [:br]

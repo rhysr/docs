@@ -9,11 +9,14 @@
     ["SELECT * FROM note ORDER BY timestamp DESC"]))
 
 
-(defn get-note-files [id]
-  [{:name "File 1" :file "file_0001.jpg" :desc "Some stuff about the file" :size "100KB"}
-   {:name "File 2" :file "file_0002.jpg" :desc "Some stuff about the file" :size "23KB"}
-   {:name "File 3" :file "file_0003.jpg" :desc "Some stuff about the file" :size "5B"}
-   {:name "File 4" :file "file_0004.jpg" :desc "Some stuff about the file" :size "1.2MB"}])
+(defn get-note-files [note-id]
+  (map
+    (fn [file] {:file (.getName file) :name (.getName file) :desc "Placeholder desc" :size "23MB"})
+    (filter
+      #(.isFile %)
+      (file-seq
+        (clojure.java.io/file
+          (str "files" "/" (str note-id)))))))
 
 (defn get-note [id]
   (jdbc/query

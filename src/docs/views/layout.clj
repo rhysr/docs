@@ -37,7 +37,7 @@
      (include-js
        "//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"
        "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
-       "/js/holder.js"
+       "//cdnjs.cloudflare.com/ajax/libs/holder/2.3.1/holder.min.js"
        "/js/docs.js"
        )]))
 
